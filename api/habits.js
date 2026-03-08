@@ -1,4 +1,4 @@
-const NOTION_VERSION = "2025-09-03";
+const NOTION_VERSION = "2022-06-28";
 
 const SOURCE_DATA_SOURCE_ID = process.env.NOTION_SOURCE_DATA_SOURCE_ID;
 const TRACKING_DATA_SOURCE_ID = process.env.NOTION_TRACKING_DATA_SOURCE_ID;
@@ -7,9 +7,9 @@ const NOTION_TOKEN = process.env.NOTION_TOKEN;
 /*
   CHANGE THESE TO MATCH YOUR NOTION PROPERTY NAMES
 */
-const SOURCE_TITLE_PROP = "Name";      // title property in source db
-const SOURCE_ARCHIVE_PROP = null;      // optional, e.g. "Visible" or "Active"
-const TRACKING_TITLE_PROP = "Name";    // title property in tracking db
+const SOURCE_TITLE_PROP = "Name";       // title property in source db
+const SOURCE_ARCHIVE_PROP = null;       // optional, e.g. "Visible" or "Active"
+const TRACKING_TITLE_PROP = "Name";     // not used in this file, okay to keep
 const TRACKING_RELATION_PROP = "Habits"; // relation property in tracking db -> source db
 
 function notionHeaders() {
@@ -46,8 +46,8 @@ function getTodayBounds() {
   };
 }
 
-async function queryDataSource(dataSourceId, body) {
-  const res = await fetch(`https://api.notion.com/v1/data_sources/${dataSourceId}/query`, {
+async function queryDatabase(databaseId, body) {
+  const res = await fetch(`https://api.notion.com/v1/databases/${databaseId}/query`, {
     method: "POST",
     headers: notionHeaders(),
     body: JSON.stringify(body || {})
@@ -114,8 +114,8 @@ export default async function handler(req, res) {
     };
 
     const [sourceData, trackingData] = await Promise.all([
-      queryDataSource(SOURCE_DATA_SOURCE_ID, sourceQuery),
-      queryDataSource(TRACKING_DATA_SOURCE_ID, trackingQuery)
+      queryDatabase(SOURCE_DATA_SOURCE_ID, sourceQuery),
+      queryDatabase(TRACKING_DATA_SOURCE_ID, trackingQuery)
     ]);
 
     const doneSet = new Set();
