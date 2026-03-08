@@ -218,6 +218,14 @@ body{padding:10px;}
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
+  transition:all .15s ease;
+}
+
+/* completed habit */
+.checkbox:checked + .habit-text{
+  text-decoration: line-through;
+  color:#bfb5b9;
+  opacity:0.75;
 }
 
 .footer{
