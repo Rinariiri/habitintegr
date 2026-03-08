@@ -77,14 +77,30 @@ export default async function handler(req, res) {
     const { start, end } = getTodayBounds();
 
     const sourceQuery = {
-      page_size: 100,
-      sorts: [
-        {
-          timestamp: "last_edited_time",
-          direction: "descending"
+  page_size: 100,
+  filter: {
+    or: [
+      {
+        property: "Routine",
+        select: {
+          equals: "Morning Routine"
         }
-      ]
-    };
+      },
+      {
+        property: "Routine",
+        select: {
+          equals: "Night Routine"
+        }
+      }
+    ]
+  },
+  sorts: [
+    {
+      timestamp: "last_edited_time",
+      direction: "descending"
+    }
+  ]
+};
 
     if (SOURCE_ARCHIVE_PROP) {
       sourceQuery.filter = {
