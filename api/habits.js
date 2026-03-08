@@ -10,7 +10,7 @@ const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const SOURCE_TITLE_PROP = "Name";      // title property in source db
 const SOURCE_ARCHIVE_PROP = null;      // optional, e.g. "Visible" or "Active"
 const TRACKING_TITLE_PROP = "Name";    // title property in tracking db
-const TRACKING_RELATION_PROP = "Habit"; // relation property in tracking db -> source db
+const TRACKING_RELATION_PROP = "Habits"; // relation property in tracking db -> source db
 
 function notionHeaders() {
   return {
