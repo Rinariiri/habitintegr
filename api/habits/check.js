@@ -139,7 +139,7 @@ export default async function handler(req, res) {
             title: [
               {
                 text: {
-                  content: `${habitName} ${todayLabel}`
+                  content: `${habitName}`
                 }
               }
             ]
